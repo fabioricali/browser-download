@@ -13,28 +13,26 @@
 </div>
 <script>
     const browserDownload = new BrowserDownload({
-       onStart(instance) {
-           console.log('onStart', instance);
-       },
-       onDownloadStart(files, instance) {
-           console.log('onDownloadStart', files, instance);
-       },
-       onDownloadEnd(files, instance) {
-           console.log('onDownloadEnd', files, instance);
-       },
-       onZipStart(instance) {
-           console.log('onZipStart', instance);
-       },
-       onZipEnd(instance) {
-           console.log('onZipEnd', instance);
-       },
-       onDone(instance) {
-           console.log('onDone', instance);
-       },
-       onError(e, instance) {
-           console.log('onError', e, instance);
-       },
+        onStart(instance) {
+            console.log('onStart', instance);
+        },
+        onDownloadStart(files, instance) {
+            console.log('onDownloadStart', files, instance);
+        },
+        onDownloadEnd(files, instance) {
+            console.log('onDownloadEnd', files, instance);
+        },
+        onZipStart(instance) {
+            console.log('onZipStart', instance);
+        },
+        onZipEnd(instance) {
+            console.log('onZipEnd', instance);
+        },
+        onEnd(error, instance) {
+            console.log('onEnd', error, instance);
+        }
     });
+
     function runDownload() {
         let files = [];
 

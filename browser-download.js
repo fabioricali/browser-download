@@ -41,11 +41,11 @@ class BrowserDownload {
                 if (typeof this.opts.onDownloadFileEnd === 'function')
                     this.opts.onDownloadFileEnd(files[0], this);
             }
-            if (typeof this.opts.onDone === 'function')
-                this.opts.onDone(this);
+            if (typeof this.opts.onEnd === 'function')
+                this.opts.onEnd(null, this);
         } catch (e) {
-            if (typeof this.opts.onError === 'function')
-                this.opts.onError(e, this);
+            if (typeof this.opts.onEnd === 'function')
+                this.opts.onEnd(e, this);
         } finally {
             this.isRunning = false;
         }
