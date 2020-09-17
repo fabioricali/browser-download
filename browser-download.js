@@ -1,10 +1,12 @@
 class BrowserDownload {
     constructor(opts) {
         this.opts = opts;
+        this.isRunning = false;
     }
 
     async run(files) {
         try {
+            this.isRunning = true;
             if (typeof this.opts.onStart === 'function')
                 this.opts.onStart(this);
             if (files.length > 1) {
@@ -44,6 +46,8 @@ class BrowserDownload {
         } catch (e) {
             if (typeof this.opts.onError === 'function')
                 this.opts.onError(e, this);
+        } finally {
+            this.isRunning = false;
         }
     }
 }
