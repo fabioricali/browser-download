@@ -16,11 +16,11 @@
         onStart(instance) {
             console.log('onStart', instance);
         },
-        onDownloadStart(files, instance) {
-            console.log('onDownloadStart', files, instance);
+        onDownloadStart(file, files, instance) {
+            console.log('onDownloadStart', file, files, instance);
         },
-        onDownloadEnd(files, instance) {
-            console.log('onDownloadEnd', files, instance);
+        onDownloadEnd(file, files, instance) {
+            console.log('onDownloadEnd', file, files, instance);
         },
         onZipStart(instance) {
             console.log('onZipStart', instance);
