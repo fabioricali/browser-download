@@ -13,14 +13,14 @@ class BrowserDownload {
                 let zip = new JSZip();
                 for (let i = 0; i < files.length; i++) {
                     if (typeof this.opts.onDownloadFileStart === 'function')
-                        this.opts.onDownloadFileStart(files[i], this);
+                        this.opts.onDownloadFileStart(files[i], files, this);
 
                     let response = await fetch(files[i].url);
                     let blob = await response.blob();
                     zip.file(files[i].name, blob);
 
                     if (typeof this.opts.onDownloadFileEnd === 'function')
-                        this.opts.onDownloadFileEnd(files[i], this);
+                        this.opts.onDownloadFileEnd(files[i], files, this);
                 }
 
                 if (typeof this.opts.onZipStart === 'function')
