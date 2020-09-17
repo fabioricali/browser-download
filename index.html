@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.1.5/dist/jszip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.2/dist/FileSaver.min.js"></script>
+    <script src="browser-download.js"></script>
+</head>
+<body>
+<div>
+    <button onclick="runDownload()">Create download</button>
+</div>
+<script>
+    const browserDownload = new BrowserDownload({
+       onStart(instance) {
+           console.log('onStart', instance);
+       },
+       onDownloadStart(files, instance) {
+           console.log('onDownloadStart', files, instance);
+       },
+       onDownloadEnd(files, instance) {
+           console.log('onDownloadEnd', files, instance);
+       },
+       onZipStart(instance) {
+           console.log('onZipStart', instance);
+       },
+       onZipEnd(instance) {
+           console.log('onZipEnd', instance);
+       },
+       onDone(instance) {
+           console.log('onDone', instance);
+       },
+       onError(e, instance) {
+           console.log('onError', e, instance);
+       },
+    });
+    function runDownload() {
+        let files = [];
+
+        for (let i = 0; i < 1; i++) {
+            files.push({
+                url: '/my-url.mp3',
+                name: `my-file-${i}.mp3`
+            })
+        }
+
+        browserDownload.run(files).then();
+
+    }
+</script>
+</body>
+</html>
