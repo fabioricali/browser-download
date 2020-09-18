@@ -16,9 +16,14 @@ class BrowserDownload {
                     if (typeof this.opts.onDownloadFileStart === 'function')
                         this.opts.onDownloadFileStart(files[i], files, totalFilesComplete, this);
 
-                    let response = await fetch(files[i].url);
-                    let blob = await response.blob();
-                    zip.file(files[i].name, blob);
+                    try {
+                        let response = await fetch(files[i].url);
+                        let blob = await response.blob();
+                        zip.file(files[i].name, blob);
+                    } catch (e) {
+                        if (typeof this.opts.onDownloadFileError === 'function')
+                            this.opts.onDownloadFileError(e, files[i], files, totalFilesComplete, this);
+                    }
 
                     totalFilesComplete++;
                     if (typeof this.opts.onDownloadFileEnd === 'function')
@@ -38,9 +43,14 @@ class BrowserDownload {
                 if (typeof this.opts.onDownloadFileStart === 'function')
                     this.opts.onDownloadFileStart(files[0], files, totalFilesComplete, this);
 
-                let response = await fetch(files[0].url);
-                let blob = await response.blob();
-                saveAs(blob, files[0].name);
+                try {
+                    let response = await fetch(files[0].url);
+                    let blob = await response.blob();
+                    saveAs(blob, files[0].name);
+                } catch (e) {
+                    if (typeof this.opts.onDownloadFileError === 'function')
+                        this.opts.onDownloadFileError(e, files[0], files, totalFilesComplete, this);
+                }
 
                 totalFilesComplete++;
                 if (typeof this.opts.onDownloadFileEnd === 'function')
