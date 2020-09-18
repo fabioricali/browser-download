@@ -19,8 +19,8 @@
         onDownloadStart(file, files, totalFilesComplete, instance) {
             console.log('onDownloadStart', file, files, totalFilesComplete, instance);
         },
-        onDownloadEnd(file, files, totalFilesComplete, instance) {
-            console.log('onDownloadEnd', file, files, totalFilesComplete, instance);
+        onDownloadEnd(err, file, files, totalFilesComplete, instance) {
+            console.log('onDownloadEnd', err, file, files, totalFilesComplete, instance);
         },
         onZipStart(instance) {
             console.log('onZipStart', instance);

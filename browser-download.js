@@ -20,14 +20,15 @@ class BrowserDownload {
                         let response = await fetch(files[i].url);
                         let blob = await response.blob();
                         zip.file(files[i].name, blob);
-                    } catch (e) {
-                        if (typeof this.opts.onDownloadFileError === 'function')
-                            this.opts.onDownloadFileError(e, files[i], files, totalFilesComplete, this);
-                    }
 
-                    totalFilesComplete++;
-                    if (typeof this.opts.onDownloadFileEnd === 'function')
-                        this.opts.onDownloadFileEnd(files[i], files, totalFilesComplete, this);
+                        totalFilesComplete++;
+                        if (typeof this.opts.onDownloadFileEnd === 'function')
+                            this.opts.onDownloadFileEnd(null, files[i], files, totalFilesComplete, this);
+
+                    } catch (e) {
+                        if (typeof this.opts.onDownloadFileEnd === 'function')
+                            this.opts.onDownloadFileEnd(e, files[i], files, totalFilesComplete, this);
+                    }
                 }
 
                 if (typeof this.opts.onZipStart === 'function')
@@ -47,14 +48,15 @@ class BrowserDownload {
                     let response = await fetch(files[0].url);
                     let blob = await response.blob();
                     saveAs(blob, files[0].name);
+
+                    totalFilesComplete++;
+                    if (typeof this.opts.onDownloadFileEnd === 'function')
+                        this.opts.onDownloadFileEnd(null, files[0], files, totalFilesComplete, this);
                 } catch (e) {
-                    if (typeof this.opts.onDownloadFileError === 'function')
-                        this.opts.onDownloadFileError(e, files[0], files, totalFilesComplete, this);
+                    if (typeof this.opts.onDownloadFileEnd === 'function')
+                        this.opts.onDownloadFileEnd(e, files[0], files, totalFilesComplete, this);
                 }
 
-                totalFilesComplete++;
-                if (typeof this.opts.onDownloadFileEnd === 'function')
-                    this.opts.onDownloadFileEnd(files[0], files, totalFilesComplete, this);
             }
             if (typeof this.opts.onEnd === 'function')
                 this.opts.onEnd(null, this);
